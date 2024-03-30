@@ -9,7 +9,17 @@ const GlobalStyle = createGlobalStyle`
 
     html, body {
         font-family: sans-serif;
+
+        width: 100%;
         max-width: 100vw;
+
+        margin: 0 auto;
+
+        background-color: #18171c;
+    }
+
+    button{
+        cursor: pointer;
     }
 `
 
