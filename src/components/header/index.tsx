@@ -1,7 +1,15 @@
+import { Link } from 'react-router-dom'
+
+import { Containner } from './styles'
+
+import logoimg from '../../assets/logo.svg'
+
 export default function Header(){
     return(
-        <>
-            <h1>header</h1>
-        </>
+        <Containner>
+            <Link to="/">
+                <img src={logoimg}/>
+            </Link>
+        </Containner>
     )
 }
