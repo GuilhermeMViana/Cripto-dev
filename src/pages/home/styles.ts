@@ -114,9 +114,15 @@ export const TdLoss = styled.td`
     }
 `
 
-export const ButtonMore = styled.button`
+export const SwitchPage = styled.div`
+    display: flex;
+
+    justify-content: center;
+`
+
+export const PageButton = styled.button`
     margin: 14px 0;
-    padding: 8px 24px;
+    padding: 12px 36px;
 
     background-color: #30beff;
     color: white;
