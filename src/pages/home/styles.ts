@@ -78,12 +78,17 @@ export const Table = styled.table`
     }
 `
 
-export const TableBody = styled.tbody`
-   
-`
-
 export const TdCoin = styled.td`
     color: #fff;
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
+`
+
+export const CoinLogo = styled.img`
+    width: 20px;
+    height: 20px;
 `
 
 export const TdMarketCap = styled.td`
@@ -96,8 +101,26 @@ export const TdValue = styled.td`
 
 export const TdValuation = styled.td`
     color: #12f98a;
+    span::after{
+        content: "%"
+    }
 `
 
 export const TdLoss = styled.td`
     color: #f91257;
+
+    span::after{
+        content: "%"
+    }
+`
+
+export const ButtonMore = styled.button`
+    margin: 14px 0;
+    padding: 8px 24px;
+
+    background-color: #30beff;
+    color: white;
+
+    border: 0;
+    border-radius: 5px;
 `
