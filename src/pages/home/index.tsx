@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 
-import * as s from './styles'
+import { CoinLogo, Containner, Form, PageButton, Search, SwitchPage, Table, TdCoin, TdLoss, TdMarketCap, TdValuation, TdValue } from './styles';
 
 import { GoSearch } from "react-icons/go";
 
@@ -101,8 +101,8 @@ export function Home() {
 
 
     return(
-        <s.Containner>
-            <s.Form
+        <Containner>
+            <Form
                 onSubmit={handleSubmit}>
                 <input 
                     type="text" 
@@ -110,12 +110,12 @@ export function Home() {
                     value={input}
                     onChange={ (e) => setInput(e.target.value) }
                 />
-                <s.Search>
+                <Search>
                     <GoSearch size={30} color="#fff"/>
-                </s.Search>
-            </s.Form>
+                </Search>
+            </Form>
 
-            <s.Table>
+            <Table>
                 <thead>
                     <tr>
                         <th scope="col">Moeda</th>
@@ -127,34 +127,34 @@ export function Home() {
                 {coins.length > 0 && coins.map( (item) => (
                         <tbody>
                             <tr key={item.id}>
-                                <s.TdCoin>
-                                    <s.CoinLogo src={`https://assets.coincap.io/assets/icons/${item.symbol.toLowerCase()}@2x.png`}/>
+                                <TdCoin>
+                                    <CoinLogo src={`https://assets.coincap.io/assets/icons/${item.symbol.toLowerCase()}@2x.png`}/>
                                     <Link to={`/details/${item.id}`}>{item.name} | {item.symbol}</Link>
-                                </s.TdCoin>
-                                <s.TdMarketCap>
+                                </TdCoin>
+                                <TdMarketCap>
                                     {item.formatedMarket}
-                                </s.TdMarketCap>
-                                <s.TdValue>
+                                </TdMarketCap>
+                                <TdValue>
                                     {item.formatedPrice}
-                                </s.TdValue>
+                                </TdValue>
                                 {Number(item.changePercent24Hr) > 0 ? (
-                                    <s.TdValuation>
+                                    <TdValuation>
                                         {/* Define a quantidade de casas decimais e usa span para inserir % no before*/}
                                         <span>{Number(item.changePercent24Hr).toFixed(2)}</span>
-                                    </s.TdValuation>) : (
-                                    <s.TdLoss>
+                                    </TdValuation>) : (
+                                    <TdLoss>
                                         {/* Define a quantidade de casas decimais e usa span para inserir % no before*/}
                                         <span>{Number(item.changePercent24Hr).toFixed(2)}</span>
-                                    </s.TdLoss>
+                                    </TdLoss>
                                 )}
                             </tr>
                         </tbody>
                     ))    
                 }
-            </s.Table>
-            <s.switchPage>
-                <s.PageButton onClick={handleGetMore}>Carregar mais</s.PageButton>
-            </s.switchPage>
-        </s.Containner>
+            </Table>
+            <SwitchPage>
+                <PageButton onClick={handleGetMore}>Carregar mais</PageButton>
+            </SwitchPage>
+        </Containner>
     )
 }
