@@ -2,26 +2,26 @@ import { FormEvent, useEffect, useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 
-import { Containner, Form, Search, Table, TdCoin, TdMarketCap,  TdValue, TdValuation, ButtonMore, TdLoss, CoinLogo } from './styles'
+import * as s from './styles'
 
 import { GoSearch } from "react-icons/go";
 
 interface CoinProps {
-        id: string,
-      rank: string,
-      symbol: string,
-      name: string,
-      supply: string,
-      maxSupply: string,
-      marketCapUsd: string,
-      volumeUsd24Hr: string,
-      priceUsd: string,
-      changePercent24Hr: string,
-      vwap24Hr:string,
-      explorer: string,
-      formatedPrice?: string,
-      formatedMarket?: string,
-      formatedVolume?: string
+    id: string,
+    rank: string,
+    symbol: string,
+    name: string,
+    supply: string,
+    maxSupply: string,
+    marketCapUsd: string,
+    volumeUsd24Hr: string,
+    priceUsd: string,
+    changePercent24Hr: string,
+    vwap24Hr:string,
+    explorer: string,
+    formatedPrice?: string,
+    formatedMarket?: string,
+    formatedVolume?: string
 }
 
 interface DataProps{
@@ -31,16 +31,17 @@ interface DataProps{
 export function Home() {
     const [input, setInput] = useState("");
     const [coins, setCoins] = useState<CoinProps[]>([]);
+    const [limit, setLimit] = useState(10);
 
 
     //Chamar os dados da api apenas quando a página carrega a primeira vez
     useEffect(() => {
        getData();
-    }, [])
+    }, [limit])
 
     //Recebendo dados da API e formatando
     async function getData(){
-        fetch("https://api.coincap.io/v2/assets?limit=10&offset=0")
+        fetch(`https://api.coincap.io/v2/assets?limit=${limit}&offset=0`)
         .then(response => response.json())
         .then( (data: DataProps) => {
             //Criando a const coinsData para evitar escrever "data.data" várias vezes
@@ -93,16 +94,15 @@ export function Home() {
         setInput("");
     }
 
-
     //Função para carregar mais moedas
     function handleGetMore(){
-        alert("Teste")
+        setLimit(limit + 10)
     }
 
 
     return(
-        <Containner>
-            <Form
+        <s.Containner>
+            <s.Form
                 onSubmit={handleSubmit}>
                 <input 
                     type="text" 
@@ -110,12 +110,12 @@ export function Home() {
                     value={input}
                     onChange={ (e) => setInput(e.target.value) }
                 />
-                <Search>
+                <s.Search>
                     <GoSearch size={30} color="#fff"/>
-                </Search>
-            </Form>
+                </s.Search>
+            </s.Form>
 
-            <Table>
+            <s.Table>
                 <thead>
                     <tr>
                         <th scope="col">Moeda</th>
@@ -127,32 +127,34 @@ export function Home() {
                 {coins.length > 0 && coins.map( (item) => (
                         <tbody>
                             <tr key={item.id}>
-                                <TdCoin>
-                                    <CoinLogo src={`https://assets.coincap.io/assets/icons/${item.symbol.toLowerCase()}@2x.png`}/>
+                                <s.TdCoin>
+                                    <s.CoinLogo src={`https://assets.coincap.io/assets/icons/${item.symbol.toLowerCase()}@2x.png`}/>
                                     <Link to={`/details/${item.id}`}>{item.name} | {item.symbol}</Link>
-                                </TdCoin>
-                                <TdMarketCap>
+                                </s.TdCoin>
+                                <s.TdMarketCap>
                                     {item.formatedMarket}
-                                </TdMarketCap>
-                                <TdValue>
+                                </s.TdMarketCap>
+                                <s.TdValue>
                                     {item.formatedPrice}
-                                </TdValue>
+                                </s.TdValue>
                                 {Number(item.changePercent24Hr) > 0 ? (
-                                    <TdValuation>
+                                    <s.TdValuation>
                                         {/* Define a quantidade de casas decimais e usa span para inserir % no before*/}
                                         <span>{Number(item.changePercent24Hr).toFixed(2)}</span>
-                                    </TdValuation>) : (
-                                    <TdLoss>
+                                    </s.TdValuation>) : (
+                                    <s.TdLoss>
                                         {/* Define a quantidade de casas decimais e usa span para inserir % no before*/}
                                         <span>{Number(item.changePercent24Hr).toFixed(2)}</span>
-                                    </TdLoss>
+                                    </s.TdLoss>
                                 )}
                             </tr>
                         </tbody>
                     ))    
                 }
-            </Table>
-            <ButtonMore onClick={handleGetMore}>Carregar mais</ButtonMore>
-        </Containner>
+            </s.Table>
+            <s.switchPage>
+                <s.PageButton onClick={handleGetMore}>Carregar mais</s.PageButton>
+            </s.switchPage>
+        </s.Containner>
     )
 }
