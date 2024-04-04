@@ -100,9 +100,14 @@ export const TdValue = styled.td`
 `
 
 export const TdValuation = styled.td`
-    color: #12f98a;
+    color: #15803d;
+
+    span::before{
+        content: "+";
+    }
+
     span::after{
-        content: "%"
+        content: "%";
     }
 `
 
@@ -110,7 +115,7 @@ export const TdLoss = styled.td`
     color: #f91257;
 
     span::after{
-        content: "%"
+        content: "%";
     }
 `
 
