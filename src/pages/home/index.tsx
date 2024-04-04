@@ -5,28 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { CoinLogo, Containner, Form, PageButton, Search, SwitchPage, Table, TdCoin, TdLoss, TdMarketCap, TdValuation, TdValue } from './styles';
 
 import { GoSearch } from "react-icons/go";
-
-interface CoinProps {
-    id: string,
-    rank: string,
-    symbol: string,
-    name: string,
-    supply: string,
-    maxSupply: string,
-    marketCapUsd: string,
-    volumeUsd24Hr: string,
-    priceUsd: string,
-    changePercent24Hr: string,
-    vwap24Hr:string,
-    explorer: string,
-    formatedPrice?: string,
-    formatedMarket?: string,
-    formatedVolume?: string
-}
-
-interface DataProps{
-    data: CoinProps[],
-}
+import { CoinProps, DataProps } from './props';
 
 export function Home() {
     const [input, setInput] = useState("");
