@@ -89,8 +89,7 @@ export function Home() {
         }
 
         navigate(`/details/${input}`);
-        // console.log(input);
-
+        
         setInput("");
     }
 
